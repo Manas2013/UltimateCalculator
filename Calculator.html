@@ -1,0 +1,355 @@
+<html>
+
+<head>
+    <title>
+        The Ultimate Calculator
+    </title>
+    <link rel="shortcut icon" href="pic/Icon.png">
+    <style>
+        :root {
+            --color: rgb(0, 136, 255);
+        }
+
+        * {
+            font-family: 'Comic Sans', 'Lucida Console Regular', 'Lucida Grande', 'Lucida Console Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(green, orange, yellow)
+        }
+
+        .calculator {
+            width: 300px;
+            height: 560px;
+            background-color: rgb(0, 136, 255);
+            border-radius: 50px;
+            transition: all 1s;
+            display: block;
+        }
+
+        .calculator:hover,
+        h1:hover {
+            background-color: rgb(219, 219, 219);
+        }
+
+        button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50px;
+            border: none;
+            font-size: 25px;
+            background-color: darks;
+            transition: all 1s;
+            cursor: pointer;
+        }
+
+        .row {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: 20%;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: blue;
+        }
+
+        h1 {
+            height: 40px;
+            transition: all 1s;
+        }
+
+        #red {
+            background-color: orangered;
+        }
+
+        #red:hover {
+            background-color: green;
+        }
+
+        .btn {
+            width: 100px;
+        }
+
+        hr {
+            border: 2px solid gainsboro;
+        }
+
+        .binarycalculator {
+            width: 130px;
+            height: 200px;
+            background-color: orange;
+            border-radius: 20px;
+            padding: 2px;
+            position: absolute;
+            top: 1%;
+        }
+
+        input[type="text"],
+        input[type="text"]:hover {
+            border: none;
+            background-color: transparent;
+            padding: 10px;
+        }
+
+        .checkbox {
+            background-color: white;
+            width: 250px;
+            height: 400px;
+            position: fixed;
+            right: 0px;
+            bottom: 0;
+            border-top-left-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="calculator" id="calc">
+            <br>
+            <br>
+            <br>
+            <h1>0</h1>
+            <hr>
+            <div class="buttons">
+                <div class="row">
+                    <button class="func" id="red">&lt;-</button>
+                    <button class="func ope">+</button>
+                    <button class="func ope">-</button>
+                    <button class="func" id="red">A/C</button>
+                </div>
+                <div class="row">
+                    <button class="func num">1</button>
+                    <button class="func num">2</button>
+                    <button class="func num">3</button>
+                    <button class="func ope" id="red">/</button>
+                </div>
+                <div class="row">
+                    <button class="func num">4</button>
+                    <button class="func num">5</button>
+                    <button class="func num">6</button>
+                    <button class="func ope" id="red">x</button>
+                </div>
+                <div class="row">
+                    <button class="func num">7</button>
+                    <button class="func num">8</button>
+                    <button class="func num">9</button>
+                    <button class="func" id="red">.</button>
+                </div>
+                <div class="row">
+                    <button class="func" id="red">&pi;</button>
+                    <button class="func num">0</button>
+                    <button class="func ope" id="red">^</button>
+                    <button class="func" id="red">=</button>
+                </div>
+                <div class="row">
+                    <button class="func ope" id="red">%</button>
+                    <button class="func" id="red">&lpar;</button>
+                    <button class="func" id="red">&rpar;</button>
+                    <button class="func" id="red">&Sqrt;</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </center>
+    <div class="binarycalculator" id="bincalc">
+        <input type="text" name="binary" id="name" placeholder="binary n">
+        <input type="text" name="decimal" id="decimal" placeholder="decimal n" readonly>
+        <div class="row">
+            <button class="bin">1</button>
+            <button class="bin">0</button>
+        </div>
+        <div class="row">
+            <button class="bin">&lt;-</button>
+            <button class="bin">A/C</button>
+        </div>
+    </div>
+
+    <div class="geomertrycalculator" id="geocalc">
+        <select name="select" id="select">
+            <option value="Circle">Circle</option>
+            <option value="Rect">Rect</option>
+            <option value="Triangle">Triangle</option>
+        </select>
+    </div>
+
+    <div class="checkbox">
+        <h4 align="center">Turn on placeholder</h4>
+        <div>
+            <label for="BinaryCalculator">BinaryCalculator</label>
+            <input type="checkbox" name="BinaryCalculator" id="toggler2">
+        </div>
+        <div>
+            <label for="Calculator">Calculator</label>
+            <input type="checkbox" name="Calculator" id="toggler1">
+        </div>
+    </div>
+    <script>
+        function checkinput(input) {
+            if (input == "π" || input == "A/C" || input == "<-" || input == "." || input == "=" || input == "(" || input == ")") {
+                return true
+            }
+            return false
+        }
+        let textarea = document.querySelector("h1")
+        document.querySelectorAll(".func").forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.getAttribute("class").includes("num")) {
+                    if (textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "-(-" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "-(+" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "+(+" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "+(-") {
+                        textarea.innerText += btn.innerText + ")"
+                    }
+                    else if (textarea.innerText.includes('%')) {
+                        textarea.innerText += "*" + btn.innerText
+                    }
+                    else {
+                        textarea.innerText += btn.innerText
+                    }
+                }
+                else if (btn.getAttribute("class").includes("ope")) {
+                    switch (btn.innerText) {
+                        case "+":
+                            if (textarea.innerText.charAt(textarea.innerText.length - 1) == "-" || textarea.innerText.charAt(textarea.innerText.length - 1) == "+") {
+                                textarea.innerText = textarea.innerText + "(+"
+                            }
+                            else {
+                                textarea.innerText = textarea.innerText + "+"
+                            }
+                            break
+                        case "-":
+                            if (textarea.innerText.charAt(textarea.innerText.length - 1) == "-" || textarea.innerText.charAt(textarea.innerText.length - 1) == "+") {
+                                textarea.innerText = textarea.innerText + "(-"
+                            }
+                            else {
+                                textarea.innerText = textarea.innerText + "-"
+                            }
+                            break
+                        case "/":
+                            textarea.innerText = textarea.innerText + "/"
+                            break
+                        case "%":
+                            textarea.innerText = textarea.innerText + "% "
+                            break
+                        case "x":
+                            textarea.innerText = textarea.innerText + "x"
+                            break
+                        case "^":
+                            textarea.innerText = textarea.innerText + "^"
+                            break
+                    }
+                }
+                else {
+                    if (checkinput(btn.innerText)) {
+                        switch (btn.innerText) {
+                            case "<-":
+                                textarea.innerText = textarea.innerText.substring(0, textarea.innerText.length - 1)
+                                break
+                            case "A/C":
+                                textarea.innerText = ""
+                                break
+                            case "π":
+                                if (textarea.innerText.charAt(textarea.innerText.length - 1) == "*" || textarea.innerText.charAt(textarea.innerText.length - 1) == "/" || textarea.innerText.charAt(textarea.innerText.length - 1) == "+" || textarea.innerText.charAt(textarea.innerText.length - 1) == "-" || textarea.innerText.charAt(textarea.innerText.length - 1) == "^") {
+                                    textarea.innerText = textarea.innerText + "π"
+                                }
+                                else {
+                                    textarea.innerText = textarea.innerText + "*π"
+                                }
+                                break
+                            case ".":
+                                textarea.innerText = textarea.innerText + "."
+                                break
+                            case "(":
+                                textarea.innerText = textarea.innerText + "("
+                                break
+                            case ")":
+                            textarea.innerText = textarea.innerText + ")"
+                            break
+                            case "=":
+                                try {
+                                    let newstr = textarea.innerText
+                                    newstr = newstr.replace("x", "*")
+                                    newstr = newstr.replace("^", "**")
+                                    newstr = newstr.replace("%", "/100")
+                                    newstr = newstr.replace("π", String(eval("22/7")).substring(0, 7))
+                                    for (let i = 0; i < 10; i++) {
+                                        newstr = newstr.replace(`${i}(`, `${i}*(`)
+                                    }
+                                    newstr = newstr.replace()
+                                    // textarea.innerText = newstr
+                                    textarea.innerText = eval(newstr)
+                                } catch (error) {
+                                    alert("Why is your Math not Mathing?")
+                                    textarea.innerText = undefined
+                                }
+                                console.log(textarea.innerHTML);
+                                break
+                        }
+                    }
+                }
+            })
+        })
+        document.getElementById("name").addEventListener("keyup", () => {
+            let n = String(document.getElementById('name').value)
+            document.getElementById("decimal").value = parseInt(n, 2)
+        })
+
+        let calcon = true;
+        document.getElementById("toggler1").addEventListener("click", () => {
+            if (calcon) {
+                document.getElementById("calc").style.display = "none"
+                calcon = false
+            }
+            else {
+                document.getElementById("calc").style.display = "block"
+                calcon = true
+            }
+
+        })
+        let bincalcon = true;
+        document.getElementById("toggler2").addEventListener("click", () => {
+            if (bincalcon) {
+                document.getElementById("bincalc").style.display = "none"
+                bincalcon = false
+            }
+            else {
+                document.getElementById("bincalc").style.display = "block"
+                bincalcon = true
+            }
+
+        })
+
+        document.querySelectorAll(".bin").forEach(num => {
+            num.addEventListener("click", () => {
+                if (!checkinput(num.innerText)) {
+                    document.getElementById("name").value += num.innerText
+                    let n = String(document.getElementById('name').value)
+                    document.getElementById("decimal").value = parseInt(n, 2)
+                }
+                else {
+                    if (num.innerText == "<-") {
+                        document.getElementById("name").value = document.getElementById("name").value.substring(0, document.getElementById("name").value.length - 1)
+                        let n = String(document.getElementById('name').value)
+                        document.getElementById("decimal").value = parseInt(n, 2)
+                    }
+                    else {
+                        document.getElementById("name").value = ""
+                        let n = String(document.getElementById('name').value)
+                        document.getElementById("decimal").value = parseInt(n, 2)
+                    }
+                }
+
+            })
+        })
+        document.getElementById("decimal").addEventListener("click", () => {
+            alert("This is an Built-in feature")
+        })
+    </script>
+</body>
+
+</html>
