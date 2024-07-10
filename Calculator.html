@@ -24,7 +24,7 @@
             background-color: rgb(0, 136, 255);
             border-radius: 50px;
             transition: all 1s;
-            display: block;
+            display: inline-block;
         }
 
         .calculator:hover,
@@ -79,8 +79,9 @@
             background-color: orange;
             border-radius: 20px;
             padding: 2px;
+            display: inline-block;
             position: absolute;
-            top: 1%;
+            top: 0%;
         }
 
         .binarycalculator input {
@@ -106,6 +107,7 @@
             border-radius: 20px;
             box-shadow: 10px 10px 10px gray;
             padding: 10px;
+            display: inline-block;
         }
 
         .inptri {
@@ -170,21 +172,69 @@
             </div>
 
         </div>
-
-
+        <div class="trignometrycalculator" id="trigcalc">
+                <div>
+                    <label for="theta">&theta;:</label>
+                    <input type="number" name="theta" id="theta" class="inptri" min="0" max="90">
+                    <hr>
+                </div>
+                <div>
+                    <label for="sin">sin &theta;</label>
+                    <input type="text" name="sin" id="sin" class="inptri" readonly>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <div>
+                    <label for="cos">cos &theta;</label>
+                    <input type="text" name="cos" id="cos" class="inptri" readonly>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <div>
+                    <label for="tan">tan &theta;</label>
+                    <input type="text" name="tan" id="tan" class="inptri" readonly>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <div>
+                    <label for="sec">sec &theta;</label>
+                    <input type="text" name="sec" id="sec" class="inptri" readonly>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <div>
+                    <label for="cosec">cosec &theta;</label>
+                    <input type="text" name="cosec" id="cosec" class="inptri" readonly>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <div>
+                    <label for="cot">cot &theta;</label>
+                    <input type="text" name="cot" id="cot" class="inptri" readonly>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+        </div>
+        <div class="binarycalculator" id="bincalc">
+            <input type="text" name="binary" id="name" placeholder="binary n">
+            <input type="text" name="decimal" id="decimal" placeholder="decimal n" readonly>
+            <div class="row">
+                <button class="bin">1</button>
+                <button class="bin">0</button>
+            </div>
+            <div class="row">
+                <button class="bin">&lt;-</button>
+                <button class="bin">A/C</button>
+            </div>
+        </div>
     </center>
-    <div class="binarycalculator" id="bincalc">
-        <input type="text" name="binary" id="name" placeholder="binary n">
-        <input type="text" name="decimal" id="decimal" placeholder="decimal n" readonly>
-        <div class="row">
-            <button class="bin">1</button>
-            <button class="bin">0</button>
-        </div>
-        <div class="row">
-            <button class="bin">&lt;-</button>
-            <button class="bin">A/C</button>
-        </div>
-    </div>
+
 
     <div class="checkbox">
         <h4 align="center">Turn on placeholder</h4>
@@ -196,56 +246,13 @@
             <label for="Calculator">Calculator</label>
             <input type="checkbox" name="Calculator" id="toggler1">
         </div>
+        <div>
+            <label for="trignometrycalculator">TrignometryCalculator</label>
+            <input type="checkbox" name="trignometrycalculator" id="toggler3">
+        </div>
     </div>
 
-    <div class="trignometrycalculator" id="trigcalc">
-        <div>
-            <label for="theta">&theta;:</label>
-            <input type="number" name="theta" id="theta" class="inptri" min="0" max="90">
-            <hr>
-        </div>
-        <div>
-            <label for="sin">sin &theta;</label>
-            <input type="text" name="sin" id="sin" class="inptri" readonly>
-            <br>
-            <br>
-            <br>
-        </div>
-        <div>
-            <label for="cos">cos &theta;</label>
-            <input type="text" name="cos" id="cos" class="inptri" readonly>
-            <br>
-            <br>
-            <br>
-        </div>
-        <div>
-            <label for="tan">tan &theta;</label>
-            <input type="text" name="tan" id="tan" class="inptri" readonly>
-            <br>
-            <br>
-            <br>
-        </div>
-        <div>
-            <label for="sec">sec &theta;</label>
-            <input type="text" name="sec" id="sec" class="inptri" readonly>
-            <br>
-            <br>
-            <br>
-        </div>
-        <div>
-            <label for="cosec">cosec &theta;</label>
-            <input type="text" name="cosec" id="cosec" class="inptri" readonly>
-            <br>
-            <br>
-            <br>
-        </div>
-        <div>
-            <label for="cot">cot &theta;</label>
-            <input type="text" name="cot" id="cot" class="inptri" readonly>
-            <br>
-            <br>
-            <br>
-        </div>
+    
     </div>
     <script>
         function checkinput(input) {
@@ -383,6 +390,18 @@
 
         })
 
+        let trigcalcon = true;
+        document.getElementById("toggler3").addEventListener("click", () => {
+            if (calcon) {
+                document.getElementById("trigcalc").style.display = "none"
+                calcon = false
+            }
+            else {
+                document.getElementById("trigcalc").style.display = "block"
+                calcon = true
+            }
+
+        })
         document.querySelectorAll(".bin").forEach(num => {
             num.addEventListener("click", () => {
                 if (!checkinput(num.innerText)) {
