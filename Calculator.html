@@ -54,7 +54,7 @@
 
         h1 {
             height: 40px;
-            transition: all 1s;
+            transition: all 0.5s;
         }
 
         #red {
@@ -83,8 +83,7 @@
             top: 1%;
         }
 
-        input[type="text"],
-        input[type="text"]:hover {
+        .binarycalculator input {
             border: none;
             background-color: transparent;
             padding: 10px;
@@ -98,6 +97,27 @@
             right: 0px;
             bottom: 0;
             border-top-left-radius: 50px;
+        }
+
+        .trignometrycalculator {
+            width: 275px;
+            height: 350px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 10px 10px 10px gray;
+            padding: 10px;
+        }
+
+        .inptri {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom-color: gainsboro;
+            background-color: transparent;
+            width: 175px;
+        }
+        .trignometrycalculator div input[type="text"] {
+            overflow: scroll;
         }
     </style>
 </head>
@@ -145,7 +165,7 @@
                     <button class="func ope" id="red">%</button>
                     <button class="func" id="red">&lpar;</button>
                     <button class="func" id="red">&rpar;</button>
-                    <button class="func" id="red">&Sqrt;</button>
+                    <button class="func ope" id="red">&Sqrt;</button>
                 </div>
             </div>
 
@@ -177,6 +197,56 @@
             <input type="checkbox" name="Calculator" id="toggler1">
         </div>
     </div>
+
+    <div class="trignometrycalculator" id="trigcalc">
+        <div>
+            <label for="theta">&theta;:</label>
+            <input type="number" name="theta" id="theta" class="inptri" min="0" max="90">
+            <hr>
+        </div>
+        <div>
+            <label for="sin">sin &theta;</label>
+            <input type="text" name="sin" id="sin" class="inptri" readonly>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div>
+            <label for="cos">cos &theta;</label>
+            <input type="text" name="cos" id="cos" class="inptri" readonly>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div>
+            <label for="tan">tan &theta;</label>
+            <input type="text" name="tan" id="tan" class="inptri" readonly>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div>
+            <label for="sec">sec &theta;</label>
+            <input type="text" name="sec" id="sec" class="inptri" readonly>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div>
+            <label for="cosec">cosec &theta;</label>
+            <input type="text" name="cosec" id="cosec" class="inptri" readonly>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div>
+            <label for="cot">cot &theta;</label>
+            <input type="text" name="cot" id="cot" class="inptri" readonly>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
     <script>
         function checkinput(input) {
             if (input == "π" || input == "A/C" || input == "<-" || input == "." || input == "=" || input == "(" || input == ")") {
@@ -188,10 +258,10 @@
         document.querySelectorAll(".func").forEach(btn => {
             btn.addEventListener('click', () => {
                 if (btn.getAttribute("class").includes("num")) {
-                    if (textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "-(-" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "-(+" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "+(+" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "+(-") {
+                    if (textarea.innerText.substring(textarea.innerText.length - 2, textarea.innerText.length) == "-(-" || textarea.innerText.substring(textarea.innerText.length - 2, textarea.innerText.length) == "-(+" || textarea.innerText.substring(textarea.innerText.length - 2, textarea.innerText.length) == "+(+" || textarea.innerText.substring(textarea.innerText.length - 2, textarea.innerText.length) == "+(-") {
                         textarea.innerText += btn.innerText + ")"
                     }
-                    else if (textarea.innerText.substring(textarea.innerText.length-1, textarea.innerText.length) == "%") {
+                    else if (textarea.innerText.substring(textarea.innerText.length - 1, textarea.innerText.length) == "%") {
                         textarea.innerText += "*" + btn.innerText
                     }
                     else {
@@ -228,6 +298,9 @@
                         case "^":
                             textarea.innerText = textarea.innerText + "^"
                             break
+                        case "√":
+                            textarea.innerText = textarea.innerText + "√"
+                            break
                     }
                 }
                 else {
@@ -254,8 +327,8 @@
                                 textarea.innerText = textarea.innerText + "("
                                 break
                             case ")":
-                            textarea.innerText = textarea.innerText + ")"
-                            break
+                                textarea.innerText = textarea.innerText + ")"
+                                break
                             case "=":
                                 try {
                                     let newstr = textarea.innerText
@@ -335,8 +408,31 @@
         document.getElementById("decimal").addEventListener("click", () => {
             alert("This is an Built-in feature")
         })
-        document.addEventListener("dblclick", ()=>{
-            alert("Hi!")
+        let theta = document.getElementById("theta")
+        let values = {
+            "sin": Math.sin(theta.value),
+            "cos": Math.cos(theta.value),
+            "tan": Math.tan(theta.value),
+            "sec": Math.sinh(theta.value),
+            "cosec": Math.cosh(theta.value),
+            "cot": Math.tanh(theta.value)
+        }
+        document.addEventListener("keydown", ()=>{
+            values = {
+                "sin": Math.sin(theta.value),
+                "cos": Math.cos(theta.value),
+                "tan": Math.tan(theta.value),
+                "sec": Math.sinh(theta.value),
+                "cosec": Math.cosh(theta.value),
+                "cot": Math.tanh(theta.value)
+            }
+            console.log(values)
+            document.getElementById("sin").value = (values["sin"]) + ` √(${document.getElementById("theta").value}/90)`
+            document.getElementById("cos").value = values["cos"] + ` 1/√(${document.getElementById("theta").value}/90)`
+            document.getElementById("tan").value = values["tan"]
+            document.getElementById("sec").value = values["sec"]
+            document.getElementById("cosec").value = values["cosec"]
+            document.getElementById("cot").value = values["cot"]
         })
     </script>
 </body>
