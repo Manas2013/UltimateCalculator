@@ -48,12 +48,6 @@
             margin-bottom: 5px;
         }
 
-        .buttons {
-            position: absolute;
-            bottom: 20%;
-            margin: 10px;
-        }
-
         button:hover {
             background-color: blue;
         }
@@ -172,14 +166,6 @@
         </div>
     </div>
 
-    <div class="geomertrycalculator" id="geocalc">
-        <select name="select" id="select">
-            <option value="Circle">Circle</option>
-            <option value="Rect">Rect</option>
-            <option value="Triangle">Triangle</option>
-        </select>
-    </div>
-
     <div class="checkbox">
         <h4 align="center">Turn on placeholder</h4>
         <div>
@@ -205,7 +191,7 @@
                     if (textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "-(-" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "-(+" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "+(+" || textarea.innerText.substring(textarea.innerText.length-2, textarea.innerText.length) == "+(-") {
                         textarea.innerText += btn.innerText + ")"
                     }
-                    else if (textarea.innerText.includes('%')) {
+                    else if (textarea.innerText.substring(textarea.innerText.length-1, textarea.innerText.length) == "%") {
                         textarea.innerText += "*" + btn.innerText
                     }
                     else {
@@ -348,6 +334,9 @@
         })
         document.getElementById("decimal").addEventListener("click", () => {
             alert("This is an Built-in feature")
+        })
+        document.addEventListener("dblclick", ()=>{
+            alert("Hi!")
         })
     </script>
 </body>
